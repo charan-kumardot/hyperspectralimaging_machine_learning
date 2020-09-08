@@ -1,7 +1,6 @@
 import streamlit as st
 
 import scipy
-from pymatreader import read_mat
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -15,6 +14,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.decomposition import PCA
 from sklearn import metrics
+import matlab.engine
+eng = matlab.engine.start_matlab()
 
 
 
@@ -29,8 +30,8 @@ st.balloons()
 
 def main():
     if Dataset == 'Indian pines':
-        x = read_mat('Indian_pines_corrected.mat')['indian_pines_corrected']
-        y = read_mat('Indian_pines_gt.mat')['indian_pines_gt']
+        x = eng.load('Indian_pines_corrected.mat')['indian_pines_corrected']
+        y = eng.load('Indian_pines_gt.mat')['indian_pines_gt']
         ys = y.shape
         names = ['Alfalfa', 'Corn-notill', 'Corn-mintill', 'Corn'
                         ,'Grass-pasture', 'Grass-trees', 'Grass-pasture-mowed',
@@ -38,14 +39,14 @@ def main():
                         'Soybean-clean', 'Wheat', 'Woods', 'Buildings-Grass-Trees-Drives',
                         'Stone-Steel-Towers']
     elif Dataset == 'pavia university':
-        x = read_mat('PaviaU.mat')['paviaU']
-        y = read_mat('PaviaU_gt.mat')['paviaU_gt']
+        x = eng.load('PaviaU.mat')['paviaU']
+        y = eng.load('PaviaU_gt.mat')['paviaU_gt']
         ys = y.shape
         names = ['Asphalt', 'Meadows', 'Gravel', 'Trees', 'Painted metal sheets', 'Bare Soil', 'Bitumen',
                  'Self-Blocking Bricks', 'Shadows']
     elif Dataset == 'salinas':
-        x = read_mat('Salinas_corrected.mat')['salinas_corrected']
-        y = read_mat('Salinas_gt.mat')['salinas_gt']
+        x = eng.load('Salinas_corrected.mat')['salinas_corrected']
+        y = eng.load('Salinas_gt.mat')['salinas_gt']
         ys = y.shape
         names = ['Brocoli_green_weeds_1','Brocoli_green_weeds_2','Fallow','Fallow_rough_plow','Fallow_smooth',
                         'Stubble','Celery','Grapes_untrained','Soil_vinyard_develop','Corn_senesced_green_weeds',
