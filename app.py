@@ -38,14 +38,14 @@ def main():
                         'Soybean-clean', 'Wheat', 'Woods', 'Buildings-Grass-Trees-Drives',
                         'Stone-Steel-Towers']
     elif Dataset == 'pavia university':
-        x = loadmat('PaviaU.mat')['paviaU']
-        y = loadmat('PaviaU_gt.mat')['paviaU_gt']
+        x = loadmat('PaviaU.mat')('paviaU']
+        y = loadmat('PaviaU_gt.mat')[(paviaU_gt']
         ys = y.shape
         names = ['Asphalt', 'Meadows', 'Gravel', 'Trees', 'Painted metal sheets', 'Bare Soil', 'Bitumen',
                  'Self-Blocking Bricks', 'Shadows']
     elif Dataset == 'salinas':
-        x = loadmat('Salinas_corrected.mat')['salinas_corrected']
-        y = loadmat('Salinas_gt.mat')['salinas_gt']
+        x = loadmat('Salinas_corrected.mat')('salinas_corrected']
+        y = loadmat('Salinas_gt.mat')('salinas_gt']
         ys = y.shape
         names = ['Brocoli_green_weeds_1','Brocoli_green_weeds_2','Fallow','Fallow_rough_plow','Fallow_smooth',
                         'Stubble','Celery','Grapes_untrained','Soil_vinyard_develop','Corn_senesced_green_weeds',
@@ -117,7 +117,7 @@ def main():
         st.pyplot()
         plt.figure(figsize=(12, 6))
         pixel_no = np.random.randint(df2.shape[0])
-        plt.plot(range(1, 201), df2.iloc[pixel_no, :-1].values.tolist(), 'b--', label=f'Class - {df2.iloc[pixel_no, -1]}')
+        plt.plot(range(1, 20), df2.iloc[pixel_no, :-1].values.tolist(), 'b--', label=f'Class - {df2.iloc[pixel_no, -1]}')
         plt.legend()
         plt.title(f'Pixel({pixel_no}) signature', fontsize=14)
         plt.xlabel('Band Number', fontsize=14)
@@ -131,10 +131,10 @@ def main():
         df_cm = pd.DataFrame(data, columns=np.unique(names), index=np.unique(names))
         df_cm.index.name = 'Actual'
         df_cm.columns.name = 'Predicted'
-        plt.figure(figsize=(12, 6))
-        sns.set(font_scale=1.4)
+        plt.figure(figsize=(2, 6))
+        sns.set(font_scale=14)
         st.title('Confusion Matrix')
-        sns.heatmap(df_cm, cmap="Reds", annot=True, annot_kws={"size": 16}, fmt='d')
+        sns.heatmap(df_cm, cmap="Red", annot=True, annot_kws={"size": 16}, fmt='d')
         st.pyplot()
         st.write("Accuracy:", metrics.accuracy_score(y_test, y_pred))
         l2 = []
