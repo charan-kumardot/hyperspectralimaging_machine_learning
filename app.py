@@ -14,7 +14,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.decomposition import PCA
 from sklearn import metrics
-import matlab.engine
+import matlab
+from matlab import engine
 eng = matlab.engine.start_matlab()
 
 
