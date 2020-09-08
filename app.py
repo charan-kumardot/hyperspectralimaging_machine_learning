@@ -19,7 +19,7 @@ from sklearn import metrics
 
 
 
-st.info(__file__)
+
 st.title('Hyperspectral Image Classification')
 Dataset = st.sidebar.selectbox('select Dataset',('Indian pines','pavia university','salinas'))
 classify = st.sidebar.selectbox('select classifier',('SVM','decisiontree','KNeighborsClassifier','RandomForestClassifier'))
@@ -64,14 +64,14 @@ def main():
     #plt.show()
     st.title('ground_truth')
     st.pyplot()
-    q = x.reshape(-1, x.shape[2])
+    q = x.reshape(-1, x.shape[0])
     df = pd.DataFrame(data=q)
     df = pd.concat([df, pd.DataFrame(data=y.ravel())], axis=1)
     df.columns = [f'band{i}' for i in range(1, 1 + x.shape[2])] + ['class']
     df.to_csv('hssi.csv')
     df2 = pd.read_csv('hssi.csv')
     del df2['Unnamed: 0']
-    pca = PCA(n_components=40)
+    pca = PCA(n_components=30)
     dt = pca.fit_transform(df2.iloc[:, :-1].values)
     r = pd.concat([pd.DataFrame(data=dt), pd.DataFrame(data=y.ravel())], axis=1)
     r.columns = [f'PC-{i}' for i in range(1, 41)] + ['class']
@@ -153,7 +153,7 @@ def main():
         accuracy = classification_report(y_test, y_pred, target_names=names)
         st.write(accuracy)
     elif classify == 'KNeighborsClassifier':
-        model = KNeighborsClassifier(n_neighbors=5)
+        model = KNeighborsClassifier(n_neighbors=3)
         model = model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         st.write("Accuracy:", metrics.accuracy_score(y_test, y_pred))
