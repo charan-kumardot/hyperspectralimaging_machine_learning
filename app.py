@@ -1,7 +1,7 @@
 import streamlit as st
 
 import scipy
-from mat4py import loadmat
+from pymatreader import read_mat
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -29,8 +29,8 @@ st.balloons()
 
 def main():
     if Dataset == 'Indian pines':
-        x = loadmat('Indian_pines_corrected.mat')['indian_pines_corrected']
-        y = loadmat('Indian_pines_gt.mat')['indian_pines_gt']
+        x = read_mat('Indian_pines_corrected.mat')['indian_pines_corrected']
+        y = read_mat('Indian_pines_gt.mat')['indian_pines_gt']
         ys = y.shape
         names = ['Alfalfa', 'Corn-notill', 'Corn-mintill', 'Corn'
                         ,'Grass-pasture', 'Grass-trees', 'Grass-pasture-mowed',
@@ -38,14 +38,14 @@ def main():
                         'Soybean-clean', 'Wheat', 'Woods', 'Buildings-Grass-Trees-Drives',
                         'Stone-Steel-Towers']
     elif Dataset == 'pavia university':
-        x = loadmat('PaviaU.mat')['paviaU']
-        y = loadmat('PaviaU_gt.mat')['paviaU_gt']
+        x = read_mat('PaviaU.mat')['paviaU']
+        y = read_mat('PaviaU_gt.mat')['paviaU_gt']
         ys = y.shape
         names = ['Asphalt', 'Meadows', 'Gravel', 'Trees', 'Painted metal sheets', 'Bare Soil', 'Bitumen',
                  'Self-Blocking Bricks', 'Shadows']
     elif Dataset == 'salinas':
-        x = loadmat('Salinas_corrected.mat')['salinas_corrected']
-        y = loadmat('Salinas_gt.mat')['salinas_gt']
+        x = read_mat('Salinas_corrected.mat')['salinas_corrected']
+        y = read_mat('Salinas_gt.mat')['salinas_gt']
         ys = y.shape
         names = ['Brocoli_green_weeds_1','Brocoli_green_weeds_2','Fallow','Fallow_rough_plow','Fallow_smooth',
                         'Stubble','Celery','Grapes_untrained','Soil_vinyard_develop','Corn_senesced_green_weeds',
